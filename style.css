@@ -1,0 +1,667 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    /* border: 2px solid yellowgreen; */
+}
+
+/* :root {
+    --namesBgColor: #7f1395;
+    --bgColor: rgb(43, 6, 51);
+    --shadowColor: rgba(116, 0, 166, 0.548);
+    --buttonBg: #ee97ff;
+    --textColor: #ff0000;
+    --borderColor: #000000;
+    --clickedButton: #f5dc1f;
+    --player1BGColor: #d52fff;
+    --player2BGColor: rgb(255, 109, 109);
+} */
+ 
+:root {
+    --namesBgColor: #ff0000;
+    /* --bgColor: rgb(43, 6, 51); */
+    /* --bgColor: rgb(255, 210, 210); */
+    --bgColor: rgb(104, 25, 25);
+    /* --shadowColor: rgb(181, 13, 13); */
+    --shadowColor: rgba(61, 61, 61, 0.548);
+    /* --buttonBg: #fff564; */
+    --buttonBg: #ff9797;
+    --textColor: #ff0000;
+    --borderColor: #000000;
+    /* --clickedButton: #ffe100; */
+    --clickedButton: #f5dc1f;
+    /* --player1BGColor: rgb(0, 98, 255);
+    --player2BGColor: rgb(21, 180, 6); */
+    /* --player1BGColor: #a458f6; */
+    --player1BGColor: #ff972f;
+    --player2BGColor: rgb(255, 0, 0);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bgColor);
+    overflow: hidden;
+}
+
+
+
+/* Splash Screen */
+.splashScreen{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bgColor);
+    z-index: 100;
+    display: flex;
+    /* display: none; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.splashScreen .splashScreenCube{
+    width: 140px;
+    height: 140px;
+    background-color: rgba(255, 85, 85, 0.333);
+    border-radius: 15px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    box-shadow: 0 0 15px rgba(255, 85, 85, 0.333);
+    animation: splashScreenAnim 5s linear infinite;
+}
+.splashScreenCube span{
+    display: inline-block;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--player2BGColor);
+    font-size: x-large;
+    font-family: cursive,serif;
+    /* color: white; */
+    color: rgb(246, 255, 0);
+    font-weight: bold;
+    text-shadow: 0 0 3px var(--shadowColor);
+}
+.splashScreenCube span:nth-child(odd){
+    background-color: var(--player1BGColor);
+}
+.splashScreenTitle{
+    color: #f5f5f5f5;
+    margin-top: 10px;
+    font-size: x-large;
+    font-family: cursive,serif;
+}
+.splashScreenLoading{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 4px solid #f5f5f5f5;
+    border-right-color: transparent;
+    animation: splashScreenLoading 2s linear infinite;
+}
+@keyframes splashScreenLoading {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
+@keyframes splashScreenAnim {
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(25deg);
+    }
+    50%{
+        transform: rotate(-25deg);
+    }
+    75%{
+        transform: rotate(25deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Draw Screen */
+.drawScreen{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bgColor);
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 101;
+}
+.drawScreen .drawCard{
+    min-width: 200px;
+    width: 300px;
+    max-width: 400px;
+    height: auto;
+    border-radius: 15px;
+    background-color: var(--namesBgColor);
+    box-shadow: inset -10px -10px 20px #cb0606,
+        inset 10px 10px 20px #cb0606,
+        0 0 10px rgba(23, 1, 22, 0.259);
+    padding: 10px 25px;
+    padding-bottom: 20px;
+    overflow: hidden;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.drawCard h1{
+    color: #f5f5f5f5;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-shadow: 0 0 3px black;
+    text-align: center;
+    margin: 10px 0;
+}
+.drawCard img{
+    width: 130px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* GAME */
+.gameSection {
+    display: none;
+    /* display: flex; */
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameBoard {
+    width: 260px;
+    height: 260px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: var(--borderColor);
+    gap: 2px;
+    border: 2px solid var(--borderColor);
+    box-shadow: 0 0 10px var(--shadowColor);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+.gameBoard button, .emptyBoxBtn {
+    cursor: pointer;
+    border: none;
+    color: var(--textColor);
+    font-size: 60px;
+    font-weight: bold;
+    /* background-color: var(--buttonBg); */
+    background-color: var(--buttonBg);
+    text-shadow: 0 0 6px var(--shadowColor);
+    box-shadow: 0 0 10px var(--shadowColor) inset;
+    aspect-ratio: 1 / 1;
+}
+
+/* .gameBoard button:hover {
+    background-color: var(--clickedButton);
+    box-shadow: 0 0 15px var(--shadowColor) inset;
+} */
+
+.resetButton{
+    width: 200px;
+    margin-top: 30px;
+    color: var(--textColor);
+    font-weight: bold;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background: #ffffff;
+    box-shadow: inset -5px -5px 10px #b0b0b0,
+        inset 5px 5px 10px #ffffff,
+        0 0 5px rgba(17, 0, 17, 0.315);
+}
+
+.hoverP1Btn:hover,
+.p1BtnSelected {
+    /* background-color: blue !important; */
+    background-color: var(--player1BGColor) !important;
+    color: var(--clickedButton) !important;
+    box-shadow: inset 0 0 15px var(--shadowColor);
+}
+
+.hoverP2Btn:hover,
+.p2BtnSelected {
+    /* background-color: green !important; */
+    background-color: var(--player2BGColor) !important;
+    color: var(--clickedButton) !important;
+    box-shadow: 0 0 15px var(--shadowColor) inset;
+}
+
+
+
+
+.winningBtn{
+    background-color: red !important;
+    border: 5px solid yellow !important;
+    animation: winnerAnimBlock 0.5s ease-in-out infinite alternate !important;
+}
+@keyframes winnerAnimBlock {
+    0%{
+        scale: 1;
+    }
+    100%{
+        scale: 1.1;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+.infoSection {
+    width: 100%;
+    /* height: 100px; */
+    /* background-color: red; */
+    top: 0;
+    position: absolute;
+}
+
+.infoSection .playerInfoCard {
+    width: 100%;
+    /* max-width: 300px; */
+    /* height: 80px; */
+    /* background-color: var(--clickedButton); */
+    /* box-shadow: 0 0 15px var(--shadowColor) inset; */
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: cursive, serif;
+}
+
+.playerInfoCard .playerInfo span {
+    background-color: #ffffff;
+    /* border: 3px dotted rgb(182, 99, 11); */
+    margin: 2px 0;
+    display: inline-block;
+    padding: 6px 8px;
+    color: #e30505;
+    border-radius: 6px;
+    font-size: larger;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.167);
+}
+
+.playerInfoCard .playerInfo .playerSymbol:nth-child(2) {
+    background-color: var(--player1BGColor);
+    padding: 0;
+    color: #fff564;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    box-sizing: content-box;
+}
+
+.playerInfoCard .playerInfo .playerSymbol:nth-child(6) {
+    background-color: var(--player2BGColor);
+    padding: 0;
+    color: #fff564;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    box-sizing: content-box;
+}
+
+.player1Symbol_Count,.player2Symbol_Count{
+    background-color: transparent !important;
+    transition: all 0.5s ease-in-out !important;
+}
+
+.currentPlayerIs {
+    color: white;
+    font-size: larger;
+    padding: 10px 0;
+    font-family: cursive, serif;
+}
+
+.speakerDiv{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--textColor);
+    box-shadow: inset 6px 6px 13px #ff2121,
+                inset -6px -6px 13px #ad0505;
+    padding: 5px;
+}
+.speakerDiv img{
+    width: 80%;
+    height: 80%;
+    filter: invert(.8);
+    /* margin-left: 5px; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Names Section */
+.playerNamesSection {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bgColor);
+    /* display: flex; */
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerNamesSectionForm {
+    min-width: 180px;
+    /* width: 300px; */
+    /* height: 300px; */
+    margin: 0 5px;
+    padding: 20px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--namesBgColor);
+    box-shadow: inset -10px -10px 20px #e30505,
+        inset 10px 10px 20px #d20000,
+        0 0 10px rgba(255, 0, 0, 0.259);
+}
+
+.playerLabel {
+    /* color: #000000; */
+    color: rgb(255, 200, 0);
+    font-size: larger;
+    font-weight: bold;
+    font-family: cursive, serif;
+    text-shadow: 0 0 6px #0000005f;
+    margin-bottom: 3px;
+}
+
+.playerNamesSectionForm input {
+    background-color: #fff;
+    font-family: cursive, serif;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 6px 10px;
+    border-radius: 7px;
+    color: rgb(158, 0, 0);
+    font-size: 15px;
+    /* box-shadow: 0 0 4px rgba(197, 0, 232, 0.984), 0 0 8px rgba(47, 1, 55, 0.984) inset; */
+    box-shadow: 0 0 4px rgba(219, 11, 11, 0.984), 0 0 12px rgba(0, 0, 0, 0.284) inset;
+}
+
+.playerNamesSectionForm input::placeholder {
+    color: rgba(163, 38, 38, 0.362);
+}
+
+input[type="submit"] {
+    width: 60%;
+    margin-top: 10px;
+    background: #ffffff;
+    box-shadow: inset -5px -5px 10px #b0b0b0,
+        inset 5px 5px 10px #ffffff,
+        0 0 5px rgba(17, 0, 17, 0.315);
+    color: var(--textColor);
+    font-weight: bold;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+input[type="submit"]:hover {
+    /* width: 50%; */
+    margin-top: 10px;
+    background-color: #ffffff;
+    box-shadow: inset 5px 5px 10px #b0b0b0,
+        inset -5px -5px 10px #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* resultScreen */
+.resultScreen {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(79, 0, 0, 0.915);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    display: none;
+}
+
+.resultCard {
+    min-width: 200px;
+    width: 400px;
+    height: 300px;
+    border-radius: 15px;
+    background-color: var(--namesBgColor);
+    box-shadow: inset -10px -10px 20px #580707,
+        inset 10px 10px 20px #d20000,
+        0 0 10px rgba(23, 1, 22, 0.259);
+    padding: 10px 25px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+.resultPlayerName{
+    text-align: center;
+    /* color: rgb(208, 66, 255); */
+    /* color: rgb(255, 183, 2); */
+    color: white;
+    font-size: 2.3rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-shadow:  0 0 8px #0000005f;
+    /* background-color: #ff0000; */
+    height: 80px;
+    line-height: 80px;
+    margin-top: 20px;
+}
+.resultCongrats{
+    text-align: center;
+    color: rgb(255, 247, 2);
+    /* color: white; */
+    text-shadow:  0 0 8px #f9e4005f;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    animation: blinker 1s linear infinite;
+    font-variant: small-caps;
+    border: 4px dotted rgb(255, 247, 2);
+    line-height: 30px;
+    padding-bottom: 5px;
+    /* font-size: large; */
+}
+@keyframes blinker {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.resultYouWin{
+    margin: 10px 0;
+    text-align: center;
+    /* font-size: 3rem; */
+    color: var(--namesBgColor);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.364);
+    /* border-radius: 10px; */
+    background-color: rgb(255, 251, 225);
+    box-shadow: inset 0 0 10px 10px #84848458, 0 0 10px 1px rgba(0, 0, 0, 0.259);
+}
+.playAgainButton{
+    width: 100%;
+    height: 50px;
+    color: #ff0000;
+    font-size: x-large;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 10px;
+    background-color: rgb(255, 247, 17);
+    box-shadow: inset 0 0 10px 10px #b3480170;
+    border: none;
+    cursor: pointer;
+}
+.playAgainButton:hover{
+    scale: 1.02;
+    transition: scale 0.2s ease-in-out;
+    background-color: rgb(255, 247, 17);
+    box-shadow: inset 0 0 10px 10px #dab200, 0 0 10px 5px rgba(0, 0, 0, 0.14);
+}
+
+@media screen and (max-width: 320px) {
+    .playerInfoCard .playerInfo .playerSymbol:nth-child(2),
+    .playerInfoCard .playerInfo .playerSymbol:nth-child(6){
+        width: 25px;
+        height: 25px;
+        padding: 0;
+        font-size: 10px;
+    }
+    .player1Symbol_Count,.player2Symbol_Count{
+        background-color: transparent !important;
+        font-size: 14px !important;
+    }
+    .player1, .player2{
+        font-size: 12px !important;
+    }
+    .gameBoard{
+        width: 200px;
+        height: 200px;
+    }
+    .playerLabel{
+        font-size: 1rem;
+    }
+    .resultPlayerName{
+        font-size: 110%;
+    }
+    .resultCongrats{
+        font-size: larger;
+    }
+    .playAgainButton{
+        height: 40px;
+        font-size: large;
+    }
+}
+@media screen and (min-width: 321px) and (max-width:480px) {
+    .gameBoard{
+        width: 240px;
+        height: 240px;
+    }
+    .resultPlayerName{
+        font-size: 2rem;
+    }
+    .resultCongrats{
+        font-size: x-larger;
+    }
+    .playAgainButton{
+        height: 45px;
+        font-size: x-large;
+    }
+}
+
+
+
+
+
+
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    /* background-color: red; */
+}
+.footer p{
+    color: #f5f5f5;
+    font-size: small;
+    font-family: cursive,serif;
+}
+
+@media screen and (min-width:1024px) {
+    .gameBoard{
+        width: 300px;
+        height: 300px;
+    }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Looping Music</title>
+  </head>
+  <body>
+    <button onclick="togglePlay()">Toggle Play</button>
+
+    <script>
+      // Create an Audio object
+      var bg_audio = new Audio("./sounds/new_sounds/game_bg_audio.mp3");
+      bg_audio.loop = true; // Set the loop property to true
+
+      // Function to toggle play/pause
+      function togglePlay() {
+        if (bg_audio.paused) {
+            bg_audio.play();
+        } else {
+          bg_audio.pause();
+          bg_audio.currentTime = 0; // Reset audio to start
+        }
+      }
+    </script>
+  </body>
+</html>

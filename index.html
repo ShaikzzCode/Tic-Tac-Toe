@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- fav icon -->
+    <link rel="icon" type="image/png" href="./assets/tic_tac_toe_icon.png" />
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <!-- splashScreen -->
+    <section class="splashScreen">
+      <div class="splashScreenCube">
+        <span>X</span>
+        <span>O</span>
+        <span></span>
+        <span>O</span>
+        <span>X</span>
+        <span>O</span>
+        <span>X</span>
+        <span></span>
+        <span></span>
+      </div>
+      <span class="splashScreenTitle">Tic Tac Toe</span>
+      <span class="splashScreenLoading"></span>
+    </section>
+    <!-- Names -->
+    <section class="playerNamesSection">
+      <div class="playerNamesSectionForm">
+        <label class="playerLabel" for="player1Name">Player 1</label>
+        <input type="text" id="player1Name" placeholder="Enter name" maxlength="16"/>
+        <label class="playerLabel" for="player2Name">Player 2</label>
+        <input type="text" id="player2Name" placeholder="Enter name" maxlength="16" />
+        <input type="submit" value="Start Game" id="startGameBtn" />
+      </div>
+    </section>
+    <section class="gameSection">
+      <div class="infoSection">
+        <div class="playerInfoCard">
+          <div class="playerInfo">
+            <span id="player1" class="player1"></span>
+            <span id="player1Symbol" class="playerSymbol">X</span>
+            <span id="player1Symbol_Count" class="player1Symbol_Count">0</span>
+            <br>
+            <span id="player2" class="player2"></span>
+            <span id="player2Symbol" class="playerSymbol">O</span>
+            <span id="player2Symbol_Count" class="player2Symbol_Count">0</span>
+          </div>
+        </div>
+        <div class="speakerDiv" id="speakerDiv">
+          <img src="./assets/svgs/speaker_on_img.svg" alt="speaker_on" id="speakerIMG">
+        </div>
+      </div>
+      <h1 class="currentPlayerIs" id="currentPlayerIs"></h1>
+      <div class="gameBoard">
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+        <button class="box" onmouseenter="hoverThis()"></button>
+      </div>
+      <button class="resetButton" id="resetButton">RESET</button>
+
+      <div class="footer">
+        <p>Made with ❤️ by Fizal Ali Shaik</p>
+      </div>
+    </section>
+
+    <!-- result screen -->
+    <div class="resultScreen">
+        <div class="resultCard">
+            <h1 class="resultPlayerName" id="resultPlayerName">Farhan Ali Shaik</h1>
+            <h1 class="resultCongrats">congradulations</h1>
+            <h1 class="resultYouWin">You Win</h1>
+            <button class="playAgainButton" id="playAgainButton">PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <!-- Draw -->
+    <div class="drawScreen" id="drawScreen">
+      <div class="drawCard">
+        <h1 class="drawText">It's a Draw</h1>
+        <img src="./assets/draw_gif.gif" alt="draw_gif">
+        <button class="playAgainButton" id="playAgainButtonDraw">PLAY AGAIN</button>
+      </div>
+    </div>
+  </body>
+</html>
